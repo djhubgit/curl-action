@@ -1,6 +1,5 @@
-           name: Time DNS Policies
+name: Time DNS Policies
 on: [push]
-
 jobs:
   curl:
     runs-on: ubuntu-latest
