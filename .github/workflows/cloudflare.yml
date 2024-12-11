@@ -8,7 +8,7 @@ jobs:
     - name: curl
       uses: enflo/curl-action@master
       with:
-        curl: {{ "https://api.cloudflare.com/client/v4/accounts/{account_id}/gateway/rules" \
+        args: {{ "https://api.cloudflare.com/client/v4/accounts/{account_id}/gateway/rules" \
 --header "X-Auth-Email: ${{ secrets.CLOUDFLARE_ACCOUNT_EMAIL }}" \
 --header "X-Auth-Key: ${{ secrets.CLOUDFLARE_API_KEY }}" \
 --header "Content-Type: application/json" \
