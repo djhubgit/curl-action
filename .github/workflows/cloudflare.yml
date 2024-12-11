@@ -1,0 +1,29 @@
+           name: Time DNS Policies
+on: push
+jobs:
+  curl:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: curl
+      uses: enflo/curl-action@master
+      with:
+        curl: {{ "https://api.cloudflare.com/client/v4/accounts/{account_id}/gateway/rules" \
+--header "X-Auth-Email: ${{ secrets.CLOUDFLARE_ACCOUNT_EMAIL }}" \
+--header "X-Auth-Key: ${{ secrets.CLOUDFLARE_API_KEY }}" \
+--header "Content-Type: application/json" \
+--data '{
+  "name": "office-no-facebook-policy",
+  "action": "block",
+  "traffic": "dns.fqdn == \"facebook.com\"",
+  "enabled": true,
+  "schedule": {
+    "time_zone": "America/Chicago",
+    "mon":  "08:00-12:30,13:30-17:00",
+    "tue":  "08:00-12:30,13:30-17:00",
+    "wed":  "08:00-12:30,13:30-17:00",
+    "thu":  "08:00-12:30,13:30-17:00",
+    "fri":  "08:00-12:30,13:30-17:00"
+  }
+}'
+}}
